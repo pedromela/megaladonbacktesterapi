@@ -60,21 +60,7 @@ namespace BacktesterAPI
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 4;
-            }
-            );
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin();// WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString());
-                        builder.AllowAnyMethod();
-                        builder.AllowAnyHeader();
-
-                    });
             });
-
-            //services.AddCors();
 
             //Jwt Authentication
 
@@ -100,19 +86,9 @@ namespace BacktesterAPI
                 };
             });
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("CorsPolicy",
-            //        builder =>
-            //        {
-            //            builder.AllowAnyOrigin();// WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString());
-            //            builder.AllowAnyMethod();
-            //            builder.AllowAnyHeader();
-            //        });
-            //});
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("https://localhost:4200", "https://m4d32tr4d3.ddns.net")
+                options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("https://localhost:4200", "https://m4d32tr4d3.ddns.net", "https://megaladon.herokuapp.com")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
