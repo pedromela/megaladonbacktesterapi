@@ -57,12 +57,7 @@ namespace BacktesterAPI.Manager
         {
             BacktestBotObservable(botId, fromDate, toDate)
             .Subscribe((data) => {
-                var list = new List<ChartModel>()
-                {
-                    new ChartModel { Data = new List<int> { data.Positions }, Label = "Positions" },
-                    new ChartModel { Data = new List<int> { data.Successes }, Label = "Successes" },
-                };
-                _hub.Clients.All.SendAsync("transferchartdata", list);
+                _hub.Clients.All.SendAsync("transferchartdata", data);
             });
 
             //await Task.Run(() => backtesterEngine.BacktestBot(botId, fromDate, toDate));
