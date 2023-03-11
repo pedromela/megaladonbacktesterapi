@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using LoginLib.Models;
 using Microsoft.AspNetCore.Identity;
+using BrokerLib.Models;
 
 namespace BacktesterAPI
 {
@@ -31,6 +32,8 @@ namespace BacktesterAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            BotDBContext.InitProviders();
+            BrokerDBContext.InitProviders();
             services.AddSingleton<BacktesterManager>();
             services.AddHostedService<QueuedHostedService>();
             services.AddSingleton<IBackgroundTaskQueue>(_ =>
